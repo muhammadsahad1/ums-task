@@ -22,7 +22,6 @@ const userSchema = new Schema<IUser>({
     phoneNumber: { type: Number },
     password: { type: String },
     role: { type: String, enum: Object.values(UserRole), default: UserRole.USER },
-
 },
     { timestamps: true }
 )
