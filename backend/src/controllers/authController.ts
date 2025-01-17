@@ -9,6 +9,7 @@ import bcrypt from 'bcrypt'
 
 export const login = async (req: Request, res: Response): Promise<void> => {
     try {
+        console.log("bodu ==>", req.body)
         const { email, password } = req.body;
 
         // Check if the email and password are provided
@@ -21,7 +22,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         }
 
         // Find the user with the provided email
-        const admin = await User.findOne({ email }).select('-password');
+        const admin = await User.findOne({ email });
 
         // If user not found or not an admin
         if (!admin || admin.role !== UserRole.ADMIN) {
@@ -34,6 +35,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
         // Compare the provided password with the stored hashed password
         const isPasswordValid = await bcrypt.compare(password, admin.password ?? '');
+        console.log(isPasswordValid)
         if (!isPasswordValid) {
             res.status(HttpStatus.UNAUTHORIZED).json({
                 status: HttpStatus.UNAUTHORIZED,
@@ -49,6 +51,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             { expiresIn: '1h' }
         );
 
+        const adminData = admin.toObject()
+        delete adminData.password
+
         // Set the token as a cookie
         res.cookie('auth_token', token, {
             httpOnly: true,
@@ -60,7 +65,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         res.status(HttpStatus.OK).json({
             status: HttpStatus.OK,
             message: StatusMessage[HttpStatus.OK],
-            data: admin,
+            data: adminData,
         });
     } catch (error) {
         console.error(error);
