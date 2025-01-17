@@ -8,6 +8,7 @@ interface IUser extends Document {
     firstName: string,
     LastName: string,
     email: string,
+    phoneNumber: number,
     password?: string,
     role: UserRole,
     createdAt: Date;
@@ -18,6 +19,7 @@ const userSchema = new Schema<IUser>({
     firstName: { type: String, required: true },
     LastName: { type: String, required: true },
     email: { type: String, required: true },
+    phoneNumber: { type: Number },
     password: { type: String },
     role: { type: String, enum: Object.values(UserRole), default: UserRole.USER },
 

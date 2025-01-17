@@ -7,5 +7,6 @@ export const StatusMessage = {
     [401]: "Unauthorized, please log in",
     [403]: "Forbidden, you do not have access",
     [404]: "Resource not found",
+    [409]: "Resource is already exists",
     [500]: "Internal server error",
 }
