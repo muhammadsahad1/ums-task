@@ -6,7 +6,7 @@ import { UserRole } from '../constants/enums';
 interface IUser extends Document {
     _id: string,
     firstName: string,
-    LastName: string,
+    lastName: string,
     email: string,
     phoneNumber: number,
     password?: string,
@@ -17,7 +17,7 @@ interface IUser extends Document {
 
 const userSchema = new Schema<IUser>({
     firstName: { type: String, required: true },
-    LastName: { type: String, required: true },
+    lastName: { type: String, required: true },
     email: { type: String, required: true },
     phoneNumber: { type: Number },
     password: { type: String },

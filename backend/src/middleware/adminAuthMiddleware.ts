@@ -2,8 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatus } from '../constants/enums'
 import { StatusMessage } from '../constants/statusMessages'
+import customRequest from '../types/express/customRequst'
 
-export const adminAuthMiddlware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const adminAuthMiddlware = async (req: customRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
         // checking the role is admin or not
         if (!req.user || req.user.role !== "admin") {

@@ -1,9 +1,10 @@
-import { NextFunction, Request, Response } from 'express'
+import { NextFunction, Request as ExpressRequest, Response } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { HttpStatus } from '../constants/enums'
 import { StatusMessage } from '../constants/statusMessages'
+import customRequest from '../types/express/customRequst'
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const authMiddleware = async (req: customRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
 
         const { auth_token } = req.cookies
