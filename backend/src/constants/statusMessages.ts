@@ -9,4 +9,5 @@ export const StatusMessage = {
     [404]: "Resource not found",
     [409]: "Resource is already exists",
     [500]: "Internal server error",
+    
 }

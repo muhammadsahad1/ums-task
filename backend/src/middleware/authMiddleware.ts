@@ -33,11 +33,11 @@ export const authMiddleware = async (req: customRequest, res: Response, next: Ne
 
         next()
 
-    } catch (error) {
-        console.error("err in authMiddleware", error)
+    } catch (error: any) {
+        console.error("err in authMiddleware", error.message)
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
             status: HttpStatus.INTERNAL_SERVER_ERROR,
-            message: StatusMessage[HttpStatus.INTERNAL_SERVER_ERROR]
+            message: error
         })
         return
     }
