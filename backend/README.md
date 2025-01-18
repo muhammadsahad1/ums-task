@@ -63,7 +63,8 @@ Email: admin@gmail.com
 Password: Sahad321@
 
 Project Structure
-ums-task/
+
+backend/
 ├── controllers/       # Request handlers
 ├── models/            # Mongoose schemas
 ├── routes/            # API route definitions
