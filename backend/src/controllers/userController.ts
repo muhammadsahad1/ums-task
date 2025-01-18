@@ -9,10 +9,10 @@ import customRequest from '../types/express/customRequst'
 export const createUser = async (req: Request, res: Response): Promise<void> => {
     try {
         // Destructuring the request body
-        const { firstName, lastName, email, phoneNumber, role } = req.body;
+        const { firstName, lastName, email, phoneNumber } = req.body;
 
         // Validate required fields
-        if (!firstName || !lastName || !email || !phoneNumber || !role) {
+        if (!firstName || !lastName || !email || !phoneNumber) {
             res.status(HttpStatus.BAD_REQUEST).json({
                 status: HttpStatus.BAD_REQUEST,
                 message: StatusMessage[HttpStatus.BAD_REQUEST]
@@ -36,7 +36,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
             lastName,
             email,
             phoneNumber,
-            role: role || UserRole.USER
+            role: UserRole.USER
         });
 
         // Save the user to the database
@@ -84,7 +84,7 @@ export const getUsers = async (req: customRequest, res: Response): Promise<void>
         const skip = (page - 1) * limit;
 
         // Getting users & checking if users exist
-        const users = await User.find({ _id: { $ne: req.user.id } }).limit(limit).skip(skip);
+        const users = await User.find({ _id: { $ne: req.user.id } }).limit(limit).skip(skip).sort({ createdAt: -1 })
         if (users.length === 0) {
             res.status(HttpStatus.NOT_FOUND).json({
                 status: HttpStatus.NOT_FOUND,
@@ -133,7 +133,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
         // Destructuring
         const { user_id } = req.params;
         const { firstName, lastName, email, phoneNumber } = req.body;
-
+        
         // Checking if user exists
         const user = await User.findById(user_id);
         if (!user) {

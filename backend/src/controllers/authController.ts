@@ -9,7 +9,6 @@ import bcrypt from 'bcrypt'
 
 export const login = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log("bodu ==>", req.body)
         const { email, password } = req.body;
 
         // Check if the email and password are provided
@@ -66,6 +65,31 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             status: HttpStatus.OK,
             message: StatusMessage[HttpStatus.OK],
             data: adminData,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+            status: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: StatusMessage[HttpStatus.INTERNAL_SERVER_ERROR],
+        });
+    }
+};
+
+
+export const logout = async (req: Request, res: Response): Promise<void> => {
+    try {
+        // Clear the auth token from the cookies
+        res.clearCookie('auth_token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        });
+
+
+        res.status(HttpStatus.OK).json({
+            status: HttpStatus.OK,
+            message: StatusMessage[HttpStatus.OK],
+            data: { message: 'Logout successful' },
         });
     } catch (error) {
         console.error(error);

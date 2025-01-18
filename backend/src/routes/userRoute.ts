@@ -10,6 +10,6 @@ const userRoute = express.Router()
 userRoute.get('/users', authMiddleware, adminAuthMiddlware, getUsers)
 userRoute.post('/user', authMiddleware, adminAuthMiddlware, createUser)
 userRoute.put('/user/update/:user_id', authMiddleware, adminAuthMiddlware, updateUser)
-userRoute.delete('/user/delete/:user_id', authMiddleware, adminAuthMiddlware, deleteUser)
+userRoute.post('/user/delete/:user_id', authMiddleware, adminAuthMiddlware, deleteUser)
 
 export default userRoute
