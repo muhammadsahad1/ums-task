@@ -1,9 +1,3 @@
-
----
-
-### Backend README
-
-```markdown
 # User Management System - Backend
 
 This is the backend implementation of the User Management System built using **Express.js** and **MongoDB**. It follows the **MVC architecture** for scalability and maintainability.
@@ -63,14 +57,13 @@ Email: admin@gmail.com
 Password: Sahad321@
 
 Project Structure
-
-backend/
-    ├── controllers/       # Request handlers
-    ├── models/            # Mongoose schemas
-    ├── routes/            # API route definitions
-    ├── middleware/        # Authentication and authorization
-    ├── utils/             # Utility functions
-    └── config/            # Configuration files
+ums-task/
+├── controllers/       # Request handlers
+├── models/            # Mongoose schemas
+├── routes/            # API route definitions
+├── middleware/        # Authentication and authorization
+├── utils/             # Utility functions
+└── config/            # Configuration files
 
 
 Authentication
